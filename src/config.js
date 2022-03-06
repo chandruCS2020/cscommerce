@@ -1,1 +1,1 @@
-export const API = process.env.REACT_APP_API_URL || "https://apicscommerce.herokuapp.com/";
+export const API = process.env.REACT_APP_API_URL || "https://apicscommerce.herokuapp.com";
