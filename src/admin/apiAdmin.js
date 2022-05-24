@@ -45,6 +45,48 @@ return fetch(`${API}/categories`, {
     .catch((err) => console.log(err));
 };
 
+export const getCategory = (categoryId) => {
+    return fetch(`${API}/category/${categoryId}`, {
+        method: 'GET',
+    })
+        .then((response) => {
+        return response.json();
+        })
+        .catch((err) => console.log(err));
+    };
+
+export const deleteCategory = (categoryId, userId, token) => {
+    return fetch(`${API}/category/${categoryId}/${userId}`, {
+        method: 'DELETE',
+        headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+        },
+    })
+        .then((response) => {
+        return response.json();
+        })
+        .catch((err) => console.log(err));
+    };
+
+export const updateCategory = (categoryId, userId, token, name) => {
+
+    return fetch(`${API}/category/${categoryId}/${userId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ name }),
+    })
+        .then((response) => {
+        return response.json();
+        })
+        .catch((err) => console.log(err));
+    };
+
 export const listOrders = (userId, token) => {
 return fetch(`${API}/order/list/${userId}`, {
     method: 'GET',

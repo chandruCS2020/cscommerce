@@ -2,28 +2,28 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../core/Layout';
 import { isAuthenticated } from '../auth';
 import { Link } from 'react-router-dom';
-import { getProducts, deleteProduct } from './apiAdmin';
+import { getProducts, deleteProduct, getCategories, deleteCategory } from './apiAdmin';
 import DeleteIcon from '@mui/icons-material/Delete';
 import UpdateIcon from '@mui/icons-material/Update';
 import { DataGrid } from '@mui/x-data-grid';
 
-const ManageProducts = () => {
-const [products, setProducts] = useState([]);
+const ManageCategory = () => {
+const [Categories, setCategories] = useState([]);
 
 const { user, token } = isAuthenticated();
 
 const loadProducts = () => {
-    getProducts().then((data) => {
+    getCategories().then((data) => {
     if (data.error) {
         console.log(data.error);
     } else {
-        setProducts(data);
+        setCategories(data);
     }
     });
 };
 
-const destroy = (productId) => {
-    deleteProduct(productId, user._id, token).then((data) => {
+const destroy = (categoryId) => {
+    deleteCategory(categoryId, user._id, token).then((data) => {
     if (data.error) {
         console.log(data.error);
     } else {
@@ -44,33 +44,6 @@ const columns = [
     width: 300,
     },
     {
-    field: "description",
-    headerName: "Description",
-    width: 300,
-    },
-    {
-    field: "price",
-    headerName: "Price",
-    width: 100,
-    },
-    {
-    field: "quantity",
-    headerName: "Quantity",
-    width: 100,
-    },
-    {
-        field: "category.name",
-        headerName: "Category",
-        width: 150,
-        renderCell:(params)=>{
-            return(
-                <>
-                    <p>{products.length>0 ? params.row.category.name : ''}</p>
-                </>
-            )
-        }
-        },
-    {
     field: "action",
     headerName: "Action",
     width: 150,
@@ -81,7 +54,7 @@ const columns = [
             <button className="userListEdit">View</button>
             </Link> */}
             {/* <button onClick={() => showProductDetailsModal(params.row)} className='userListEdit'>View</button> */}
-            <Link to={`/admin/product/update/${params.row._id}`}>
+            <Link to={`/admin/category/update/${params.row._id}`}>
                 <UpdateIcon
                 className="userListUpdate"
                 />
@@ -99,12 +72,12 @@ const columns = [
 
 return (
     <Layout
-    title='Manage Products'
-    description='Perform CRUD on products'
+    title='Manage Category'
+    description='Perform CRUD on category'
     className='container-fluid'
     >
     <DataGrid
-            rows={products}
+            rows={Categories}
             disableSelectionOnClick
             columns={columns}
             pageSize={pageSize}
@@ -118,4 +91,4 @@ return (
 );
 };
 
-export default ManageProducts;
+export default ManageCategory;

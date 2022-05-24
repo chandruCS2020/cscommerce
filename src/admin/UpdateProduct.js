@@ -107,6 +107,7 @@ const clickSubmit = (event) => {
     );
 };
 
+
 const newPostForm = () => (
     <form className='mb-3' onSubmit={clickSubmit}>
     

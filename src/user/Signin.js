@@ -139,7 +139,6 @@ const signInForm = () => (
             type='password'
             id='password'
             onChange={handleChange('password')}
-            type='password'
             value={password}
             autoComplete='current-password'
         />

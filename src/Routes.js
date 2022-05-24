@@ -18,6 +18,8 @@ import ManageProducts from './admin/ManageProducts';
 import UpdateProduct from './admin/UpdateProduct';
 import NotFound from './core/NotFound';
 import Order from './user/order';
+import ManageCategory from './admin/ManageCategory';
+import UpdateCategory from './admin/UpdateCategory';
 
 const Routes = () => {
   return (
@@ -36,10 +38,16 @@ const Routes = () => {
         <AdminRoute path='/admin/orders' component={Orders} exact />
         <PrivateRoute path='/profile/:userId' component={Profile} exact />
         <AdminRoute path='/admin/products' component={ManageProducts} exact />
+        <AdminRoute path='/admin/categories' component={ManageCategory} exact />
         <PrivateRoute path='/user/order' component={Order} exact />
         <AdminRoute
           path='/admin/product/update/:productId'
           component={UpdateProduct}
+          exact
+        />
+        <AdminRoute
+          path='/admin/category/update/:productId'
+          component={UpdateCategory}
           exact
         />
         <Route component={NotFound} />
